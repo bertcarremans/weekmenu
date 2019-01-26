@@ -236,7 +236,7 @@ def choose_recipe(difficulty, idx, weekmenu_df, eligible_recipes):
     choice_idx : datetime index
         index of the chosen recipe in the eligible_recipes dataFrame
     """
-    choice_idx = np.random.choice(eligible_recipes.query("difficulty == '" + difficulty + "'" ).index.values)
+    choice_idx = np.random.choice(eligible_recipes.query("difficulty == 'difficult'" ).sort_values('last_date_on_menu', na_position='first').index.values[:5])
     weekmenu_df.loc[idx, 'recipe'] = eligible_recipes.loc[choice_idx, 'recipe']
     weekmenu_df.loc[idx, 'description'] = eligible_recipes.loc[choice_idx, 'description']
     eligible_recipes.drop(choice_idx, inplace=True)
