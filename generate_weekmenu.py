@@ -122,7 +122,7 @@ def get_date_last_event(service, calendarId):
     events_result = service.events().list(calendarId=calendarId
                                         , singleEvents=True
                                         , orderBy='startTime').execute()
-    date_last_event = events_result.get('items', [])[-1]['start']['date']
+    date_last_event = events_result.get('items', [])[-1]['start']['date'][:10]
     date_last_event = datetime.strptime(date_last_event, '%Y-%m-%d').date()
     return date_last_event
 
